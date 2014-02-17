@@ -5,7 +5,7 @@ namespace PhobetorBillomatBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**\
- * @livense MIT
+ * @license MIT
  */
 class PhobetorBillomatBundle extends Bundle
 {
