@@ -1,0 +1,7 @@
+parameters:
+    phobetor_billomat.handler: PhobetorBillomatBundle\Services\BillomatHandler
+
+services:
+  phobetor_billomat:
+    class: %phobetor_billomat.handler%
+    arguments: [%phobetor_billomat.id%,%phobetor_billomat.api_key%,%phobetor_billomat.async%]

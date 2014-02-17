@@ -1,4 +1,4 @@
 billomat-bundle
 ===============
 
-A Symfony 2 bundle around the billomat API client
+A Symfony 2 bundle around the Billomat API client

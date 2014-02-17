@@ -1,0 +1,28 @@
+{
+    "name": "phobetor/billomat-bundle",
+    "type": "library",
+    "license": "MIT",
+    "description" : "A Symfony 2 bundle around the Billomat API client",
+    "keywords": [
+        "billomat",
+        "invoice",
+        "billing",
+        "symfony2"
+    ],
+    "homepage": "https://github.com/Phobetor/billomat-bundle",
+    "authors": [
+        {
+            "name": "Andreas Kintzinger",
+            "homepage": "https://github.com/Phobetor/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "2.*",
+        "phobetor/billomat": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "PhobetorBillomatBundle": "" }
+    },
+    "target-dir": "PhobetorBillomatBundle"
+}
