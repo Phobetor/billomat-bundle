@@ -1,7 +1,7 @@
 Billomat API Client Bundle for Symfony 2
 ===============
 
-[![Latest Stable Version](https://poser.pugx.org/phobetor/billomat-bundle/v/stable.png)](https://packagist.org/packages/phobetor/billomat-bundle)
+[![Latest Stable Version](https://poser.pugx.org/phobetor/billomat-bundle/v/stable.png)](https://packagist.org/packages/phobetor/billomat-bundle) [![License](https://poser.pugx.org/phobetor/billomat-bundle/license.png)](https://packagist.org/packages/phobetor/billomat-bundle)
 
 A Symfony 2 bundle for the [Billomat API client](https://github.com/Phobetor/billomat).
 
