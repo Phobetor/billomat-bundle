@@ -52,8 +52,8 @@ Add your credentials to `app/config/config.yml`:
 ``` yml
 # app/config/config.yml
 phobetor_billomat:
-  id: # your Billomat id (required)
-  api_key: #your Billomat API key (required)
+  id: 'my-id'       # your Billomat id (required)
+  api_key: 'my-key' # your Billomat API key (required)
 ```
 
 ## Usage
@@ -62,4 +62,27 @@ Get client from Symfony’s DI container:
 
 ```php
 $billomat = $this->get('phobetor_billomat')->getClient();
+```
+
+## Automatic rate limit handling
+
+If this client is used in asynchronous processes or CLI commands you can activate automatic waiting for rate limit reset.
+In that mode all method calls that would otherwise throw a `\Phobetor\Billomat\Exception\TooManyRequestsException` will wait for the rate limit reset and retry automatically.
+You SHOULD NOT use this in synchronous request (e. g. a website request) because all method calls in that mode can last very long and most likely longer than your server’s gateway timeout.
+There are two ways to do this.
+
+In configuration:
+
+``` yml
+# app/config/config.yml
+phobetor_billomat:
+  # […]
+  wait_for_rate_limit_reset: true
+```
+
+After fetching from container:
+
+```php
+$billomat = $this->get('phobetor_billomat')->getClient();
+$billomat->setDoWaitForRateLimitReset(true);
 ```

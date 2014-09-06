@@ -23,6 +23,11 @@ class BillomatHandler
     /**
      * @var bool
      */
+    private $waitForRateLimitReset;
+
+    /**
+     * @var bool
+     */
     private $async;
 
     /**
@@ -30,15 +35,17 @@ class BillomatHandler
      *
      * @param string  $id billomat id
      * @param string  $apiKey billomat API key
+     * @param boolean $waitForRateLimitReset optional wait for rate limit reset if rate limit is reached during a request
      * @param boolean $async optional use of Guzzle Async plugin
      *
      * @return BillomatHandler
      */
-    public function __construct($id, $apiKey, $async = false)
+    public function __construct($id, $apiKey, $waitForRateLimitReset, $async = false)
     {
         $this->id = (string) $id;
         $this->apiKey = (string) $apiKey;
-        $this->async  = (bool) $async;
+        $this->waitForRateLimitReset = (bool) $waitForRateLimitReset;
+        $this->async = (bool) $async;
     }
 
     /**
@@ -48,7 +55,7 @@ class BillomatHandler
      */
     public function getClient()
     {
-        $client = new BillomatClient($this->id, $this->apiKey);
+        $client = new BillomatClient($this->id, $this->apiKey, BillomatClient::LATEST_API_VERSION, $this->waitForRateLimitReset);
 
         if($this->async) {
             $client->addSubscriber(new AsyncPlugin());

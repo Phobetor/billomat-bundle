@@ -19,7 +19,7 @@
     ],
     "require": {
         "symfony/framework-bundle": "2.*",
-        "phobetor/billomat": "~1.0"
+        "phobetor/billomat": "~1.5"
     },
     "autoload": {
         "psr-0": { "PhobetorBillomatBundle": "" }

@@ -25,7 +25,7 @@ class PhobetorBillomatExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        foreach (array('id', 'api_key', 'async') as $attribute) {
+        foreach (array('id', 'api_key', 'wait_for_rate_limit_reset', 'async') as $attribute) {
             if (isset($config[$attribute])) {
                 $container->setParameter('phobetor_billomat.' . $attribute, $config[$attribute]);
             }

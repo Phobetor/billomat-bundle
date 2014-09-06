@@ -4,4 +4,4 @@ parameters:
 services:
   phobetor_billomat:
     class: %phobetor_billomat.handler%
-    arguments: [%phobetor_billomat.id%,%phobetor_billomat.api_key%,%phobetor_billomat.async%]
+    arguments: [%phobetor_billomat.id%,%phobetor_billomat.api_key%,%phobetor_billomat.wait_for_rate_limit_reset%,%phobetor_billomat.async%]
