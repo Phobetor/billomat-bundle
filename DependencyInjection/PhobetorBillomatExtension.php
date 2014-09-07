@@ -26,9 +26,10 @@ class PhobetorBillomatExtension extends Extension
         $loader->load('services.yml');
 
         foreach (array('id', 'api_key', 'wait_for_rate_limit_reset', 'async') as $attribute) {
-            if (isset($config[$attribute])) {
-                $container->setParameter('phobetor_billomat.' . $attribute, $config[$attribute]);
-            }
+			$container->setParameter('phobetor_billomat.' . $attribute, $config[$attribute]);
         }
+
+        $container->setParameter('phobetor_billomat.application.id', $config['application']['id']);
+        $container->setParameter('phobetor_billomat.application.secret', $config['application']['secret']);
     }
 }

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.0
+
+* add application to bundle configuration
+
 ## 1.1.0
 
 * add rate limit handling flag to bundle configuration
