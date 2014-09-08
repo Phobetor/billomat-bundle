@@ -10,68 +10,49 @@ use Phobetor\Billomat\Client\BillomatClient;
  */
 class BillomatHandler
 {
-    /**
-     * @var string
-     */
-    private $id;
+    const DEFAULT_CLIENT_NAME = 'default';
 
     /**
-     * @var string
+     * @var array
      */
-    private $apiKey;
-
-    /**
-     * @var string
-     */
-    private $apiAppId;
-
-    /**
-     * @var string
-     */
-    private $apiAppSecret;
-
-    /**
-     * @var bool
-     */
-    private $waitForRateLimitReset;
-
-    /**
-     * @var bool
-     */
-    private $async;
+    private $clients;
 
     /**
      * Initialize Handler
      *
-     * @param string  $id billomat id
-     * @param string  $apiKey billomat API key
-     * @param string  $apiAppId billomat API application id
-     * @param string  $apiAppSecret billomat API application secret
-     * @param boolean $waitForRateLimitReset optional wait for rate limit reset if rate limit is reached during a request
-     * @param boolean $async optional use of Guzzle Async plugin
+     * @param array $clients client configuration list
      *
      * @return BillomatHandler
      */
-    public function __construct($id, $apiKey, $apiAppId, $apiAppSecret, $waitForRateLimitReset, $async = false)
+    public function __construct(array $clients)
     {
-        $this->id = (string) $id;
-        $this->apiKey = (string) $apiKey;
-        $this->apiAppId = (string) $apiAppId;
-        $this->apiAppSecret = (string) $apiAppSecret;
-        $this->waitForRateLimitReset = (bool) $waitForRateLimitReset;
-        $this->async = (bool) $async;
+        $this->clients = $clients;
     }
 
     /**
      * Create Billomat Client
      *
+     * @param string $name
      * @return \Phobetor\Billomat\Client\BillomatClient $client
+     * @throws \InvalidArgumentException
      */
-    public function getClient()
+    public function getClient($name = self::DEFAULT_CLIENT_NAME)
     {
-        $client = new BillomatClient($this->id, $this->apiKey, $this->apiAppId, $this->apiAppSecret, $this->waitForRateLimitReset);
+        if (empty($this->clients[$name])) {
+            throw new \InvalidArgumentException(sprintf('client with name "%s" not found'. $name));
+        }
 
-        if($this->async) {
+        $config = $this->clients[$name];
+
+        $client = new BillomatClient(
+            $config['id'],
+            $config['api_key'],
+            $config['application']['id'],
+            $config['application']['secret'],
+            $config['wait_for_rate_limit_reset']
+        );
+
+        if ($config['async']) {
             $client->addSubscriber(new AsyncPlugin());
         }
 

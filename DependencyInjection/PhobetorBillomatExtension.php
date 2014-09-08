@@ -6,6 +6,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use PhobetorBillomatBundle\Services\BillomatHandler;
 
 /**
  * This is the class that loads and manages your bundle configuration
@@ -25,11 +26,14 @@ class PhobetorBillomatExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        foreach (array('id', 'api_key', 'wait_for_rate_limit_reset', 'async') as $attribute) {
-			$container->setParameter('phobetor_billomat.' . $attribute, $config[$attribute]);
+        // fetch client list from configuration
+        $clients = $config['clients'];
+
+        // overwrite default client by top level configuration data
+        foreach (array('id', 'api_key', 'application', 'wait_for_rate_limit_reset', 'async') as $attribute) {
+            $clients[BillomatHandler::DEFAULT_CLIENT_NAME][$attribute] = $config[$attribute];
         }
 
-        $container->setParameter('phobetor_billomat.application.id', $config['application']['id']);
-        $container->setParameter('phobetor_billomat.application.secret', $config['application']['secret']);
+        $container->setParameter('phobetor_billomat.clients', $clients);
     }
 }
