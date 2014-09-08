@@ -54,7 +54,13 @@ Add your credentials to `app/config/config.yml`:
 phobetor_billomat:
   id: 'my-id'       # your Billomat id (required)
   api_key: 'my-key' # your Billomat API key (required)
+  application:      # your Billomat API application credentials
+                    # (if you have a registered application)
+    id: 'my-app-id'         # your Billomat API application id
+    secret: 'my-app-secret' # your Billomat API application secret
 ```
+
+Using the Billomat API with a registered app is highly recommended due to higher rate limits.
 
 ## Usage
 
