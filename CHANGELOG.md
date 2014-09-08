@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.3.0
+
+* add multiple client handling
+
 ## 1.2.0
 
 * add application to bundle configuration
